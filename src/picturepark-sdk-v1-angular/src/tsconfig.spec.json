@@ -4,8 +4,12 @@
     "outDir": "../out-tsc/spec",
     "types": [
       "jasmine",
+      "jquery",
+      "jsdom",
       "node"
-    ]
+    ],
+    "module": "commonjs",
+    "allowJs": true
   },
   "files": [
     "test.ts",
