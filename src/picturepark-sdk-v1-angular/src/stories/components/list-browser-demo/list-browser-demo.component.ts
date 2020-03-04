@@ -4,7 +4,7 @@ import { AuthService, FilterBase, ListItem, SchemaDetail, SchemaService, SearchB
 import { ContentModel } from '@picturepark/sdk-v1-angular-ui';
 
 @Component({
-    template: `<pp-list-browser [schema]="selectedSchema"
+    template: `<pp-list-browser *ngIf="selectedSchema" [schema]="selectedSchema"
                                 [selectedItemIds]="selectedItemIds"
                                 [enableSelection]="enableSelection"
                                 [sortInfo]="sortInfo"
@@ -23,6 +23,7 @@ export class ListBrowserDemoComponent implements OnInit {
     @Input() public selectedFilter: FilterBase | null = null;
     @Input() public searchText = '';
     @Input() public searchBehavior: SearchBehavior;
+    @Input() public schemaId = 'MediaType';
 
     @Output() public previewItemChange = new EventEmitter<ContentModel<ListItem>>();
     @Output() public selectedItemsChange = new EventEmitter<ListItem[]>();
@@ -32,12 +33,12 @@ export class ListBrowserDemoComponent implements OnInit {
 
     constructor(private authService: AuthService, private schemaService: SchemaService) { }
 
-    ngOnInit(): void {
-        this.schemaService.getMany(null).pipe(
+    async ngOnInit(): Promise<void> {
+        this.schemaService.getMany([this.schemaId]).pipe(
             take(1),
         ).subscribe(
-            (channels) => {
-                this.selectedSchema = channels[0];
+            (schemas) => {
+                this.selectedSchema = schemas[0];
             },
             () => {
                 console.log('schema service error');

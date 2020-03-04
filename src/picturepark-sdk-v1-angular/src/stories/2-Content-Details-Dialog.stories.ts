@@ -4,7 +4,7 @@ import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthService, AccessTokenAuthService, PICTUREPARK_CONFIGURATION } from '@picturepark/sdk-v1-angular';
-import { PICTUREPARK_UI_CONFIGURATION, ListBrowserModule } from '@picturepark/sdk-v1-angular-ui';
+import { PICTUREPARK_UI_CONFIGURATION, ContentDetailsDialogModule, SharedModule } from '@picturepark/sdk-v1-angular-ui';
 import { PictureparkConfigurationFactory, PictureparkUIConfigurationFactory } from './config';
 import { ContentDetailsDialogDemoComponent } from './components/content-details-dialog-demo/content-details-dialog-demo.component';
 
@@ -13,11 +13,11 @@ export default {
     decorators: [
         withKnobs,
         moduleMetadata({
-            imports: [ListBrowserModule, HttpClientModule, BrowserAnimationsModule],
+            imports: [ContentDetailsDialogModule, SharedModule.forRoot(), HttpClientModule, BrowserAnimationsModule],
             providers: [
                 { provide: AuthService, useClass: AccessTokenAuthService },
                 { provide: PICTUREPARK_CONFIGURATION, useFactory: PictureparkConfigurationFactory },
-                { provide: PICTUREPARK_UI_CONFIGURATION, useFactory: PictureparkUIConfigurationFactory }
+                { provide: PICTUREPARK_UI_CONFIGURATION, useFactory: PictureparkUIConfigurationFactory },
             ]
         })]
 };

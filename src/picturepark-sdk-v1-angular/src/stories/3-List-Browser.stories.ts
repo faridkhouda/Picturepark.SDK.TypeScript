@@ -8,6 +8,17 @@ import { PICTUREPARK_UI_CONFIGURATION, ListBrowserModule } from '@picturepark/sd
 import { PictureparkConfigurationFactory, PictureparkUIConfigurationFactory } from './config';
 import { ListBrowserDemoComponent } from './components/list-browser-demo/list-browser-demo.component';
 
+export enum SchemaId {
+    MediaType = 'MediaType',
+    License = 'License',
+    Organisation = 'Organisation',
+    Person = 'Person',
+    DocumentInformation = 'DocumentInformation',
+    ImageInformation = 'ImageInformation',
+    MultimediaInformation = 'MultimediaInformation',
+    OtherContentInformation = 'OtherContentInformation'
+}
+
 export default {
     title: 'List Browser',
     decorators: [
@@ -29,6 +40,7 @@ export const ListBrowserComponentWithKnobs = () => ({
         selectedFilter: null,
         searchText: text('searchText', ''),
         searchBehavior: select('searchBehavior', SearchBehavior, SearchBehavior.SimplifiedSearch),
+        schemaId: select('schemaId', SchemaId, SchemaId.MediaType),
         previewItemChange: action('Preview item changed'),
         selectedItemsChange: action('Selected items changed'),
         totalResultsChange: action('Total results changed')
