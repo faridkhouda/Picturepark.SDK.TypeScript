@@ -1,56 +1,38 @@
 @import '~@angular/material/theming';
 
 // SCHEMA BROWSER ITEM BASE VARS
-$pp-schema-browser-item: (selected-background: #6f6f6f,
-    contrast: ());
+$pp-schema-browser-item: (
+  contrast: (),
+);
 
 @mixin pp-schema-browser-item-theme($theme) {
+  $primary: map-get($theme, primary);
 
-    $primary: map-get($theme, primary);
-
+  pp-schema-browser-item {
     .schema-browser-item-container {
+      background-color: mat-color($primary, surface-light);
+      color: mat-color($primary, on-surface-light);
 
-        .schema-content {
-            &--selected {
-                box-shadow: 0 0 0 2px mat-color($pp-schema-browser-item, selected-background);
-            }
+      .schema-content {
+        &--selected {
+          border-color: mat-color($primary, primary);
         }
+      }
 
-        .schema-icon {
-            background-color: mat-color($primary, dialog-background);
+      .schema-icon {
+        background-color: rgba(0, 0, 0, 0.03);
+        color: mat-color($primary, on-surface-mid);
+      }
 
-            mat-icon {
-                color: #aaaaaa
-            }
+      .schema-menu {
+        background-color: mat-color($primary, surface-light);
+
+        .mat-button {
+          mat-icon {
+            color: mat-color($primary, on-surface-light);
+          }
         }
-
-        .schema-info {
-
-            .sub-title {
-                color: #aaaaaa;
-            }
-        }
-
-        .schema-menu {
-            background-color: #ffffff;
-
-            .mat-button {
-                mat-icon {
-                    color: #727272;
-                }
-            }
-        }
-
-        .schema-icon.child::before {
-            content: '';
-            border-right: 2px solid #aaaaaa;
-            border-top: 2px solid #aaaaaa;
-        }
-
-        .schema-icon.parent::after {
-            content: '';
-            border-left: 2px solid #aaaaaa;
-            border-bottom: 2px solid #aaaaaa;
-        }
+      }
     }
+  }
 }

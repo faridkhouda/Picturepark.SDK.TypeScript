@@ -9,7 +9,7 @@ import { RelationFieldInfo } from './models/relation-field-info';
 @Component({
   selector: 'pp-layer-panels',
   templateUrl: './layer-panels.component.html',
-  styleUrls: ['./layer-panels.component.scss']
+  styleUrls: ['./layer-panels.component.scss'],
 })
 export class LayerPanelsComponent implements OnInit {
   @Input()
@@ -27,22 +27,21 @@ export class LayerPanelsComponent implements OnInit {
   public layers: Layer[] = [];
   private allSchemas: SchemaDetail[];
 
-  private nonVirtualContentSchemasIds = ['AudioMetadata', 'DocumentMetadata', 'FileMetadata', 'ImageMetadata', 'VideoMetadata'];
-
-  constructor(private schemaService: SchemaService,
-    private layerFieldService: LayerFieldService) { }
+  constructor(private schemaService: SchemaService, private layerFieldService: LayerFieldService) {}
 
   ngOnInit() {
-    this.schemaService.getManyReferenced([this.content.contentSchemaId])
+    this.schemaService
+      .getManyReferenced([this.content.contentSchemaId])
       .pipe(take(1))
-      .subscribe(schemaDetails => {
-
+      .subscribe((schemaDetails) => {
         this.allSchemas = [...this.schemas, ...schemaDetails];
 
-        const contentSchema = this.schemas.find(i => i.id === this.content.contentSchemaId);
-        if (!contentSchema) { return; }
+        const contentSchema = this.schemas.find((i) => i.id === this.content.contentSchemaId);
+        if (!contentSchema) {
+          return;
+        }
 
-        const isVirtualContent = this.nonVirtualContentSchemasIds.indexOf(this.content.contentSchemaId) < 0;
+        const isVirtualContent = this.content.isVirtual();
         const schemas = this.showContentSchema && isVirtualContent ? [this.content.contentSchemaId] : [];
 
         if (contentSchema.layerSchemaIds) {
@@ -53,13 +52,16 @@ export class LayerPanelsComponent implements OnInit {
           schemas.push(this.content.contentSchemaId);
         }
 
-        schemas.forEach(layerSchemaId => {
-          const schema: SchemaDetail | undefined = this.schemas.find(i => i.id === layerSchemaId);
-          if (!schema) { return; }
+        schemas.forEach((layerSchemaId) => {
+          const schema: SchemaDetail | undefined = this.schemas.find((i) => i.id === layerSchemaId);
+          if (!schema) {
+            return;
+          }
 
-          const schemaMetadata = schema.id === this.content.contentSchemaId ?
-            this.content.content :
-            this.content.metadata && this.content.metadata[this.toLowerCamel(schema.id)];
+          const schemaMetadata =
+            schema.id === this.content.contentSchemaId
+              ? this.content.content
+              : this.content.metadata && this.content.metadata[this.toLowerCamel(schema.id)];
 
           if (!schemaMetadata || !schema.fields) {
             return;
@@ -67,10 +69,10 @@ export class LayerPanelsComponent implements OnInit {
 
           const layer: Layer = {
             names: schema.names,
-            fields: []
+            fields: [],
           };
 
-          schema.fields.forEach(schemaField => {
+          schema.fields.forEach((schemaField) => {
             if (schemaMetadata[schemaField.id]) {
               const layerField = this.layerFieldService.generate(schemaField, schemaMetadata, this.allSchemas);
 

@@ -1,5 +1,5 @@
 import { configureTest } from './config';
-import { AggregationResultItem, AggregationFilter } from '../lib/api-services';
+import { AggregationResultItem, AggregationFilter } from '../lib/services/api-services';
 
 describe('AggregationResultItem', () => {
   let aggregationResultItem: AggregationResultItem;
@@ -11,9 +11,7 @@ describe('AggregationResultItem', () => {
   beforeEach(configureTest);
 
   describe('getDisplayName', () => {
-
     describe('if aggregationName is ownerTokenId', () => {
-
       beforeAll(() => {
         aggregationResultItem.filter = new AggregationFilter();
         aggregationResultItem.filter.aggregationName = 'ownerTokenId';
