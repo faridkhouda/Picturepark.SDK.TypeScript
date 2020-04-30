@@ -9,28 +9,29 @@ import { PictureparkConfigurationFactory, PictureparkUIConfigurationFactory } fr
 import { ContentDetailsDialogDemoComponent } from './components/content-details-dialog-demo/content-details-dialog-demo.component';
 
 export default {
-    title: 'Content Details Dialog',
-    decorators: [
-        withKnobs,
-        moduleMetadata({
-            imports: [ContentDetailsDialogModule, SharedModule.forRoot(), HttpClientModule, BrowserAnimationsModule],
-            providers: [
-                { provide: AuthService, useClass: AccessTokenAuthService },
-                { provide: PICTUREPARK_CONFIGURATION, useFactory: PictureparkConfigurationFactory },
-                { provide: PICTUREPARK_UI_CONFIGURATION, useFactory: PictureparkUIConfigurationFactory },
-            ]
-        })]
+  title: 'Content Details Dialog',
+  decorators: [
+    withKnobs,
+    moduleMetadata({
+      imports: [ContentDetailsDialogModule, SharedModule.forRoot(), HttpClientModule, BrowserAnimationsModule],
+      providers: [
+        { provide: AuthService, useClass: AccessTokenAuthService },
+        { provide: PICTUREPARK_CONFIGURATION, useFactory: PictureparkConfigurationFactory },
+        { provide: PICTUREPARK_UI_CONFIGURATION, useFactory: PictureparkUIConfigurationFactory },
+      ],
+    }),
+  ],
 };
 
 export const ContentDetailsDialogComponentWithKnobs = () => ({
-    component: ContentDetailsDialogDemoComponent,
-    props: {
-        // enableSelection: boolean('enableSelection', true),
-        // selectedFilter: null,
-        // searchText: text('searchText', ''),
-        // searchBehavior: select('searchBehavior', SearchBehavior, SearchBehavior.SimplifiedSearch),
-        // previewItemChange: action('Preview item changed'),
-        // selectedItemsChange: action('Selected items changed'),
-        // totalResultsChange: action('Total results changed')
-    }
+  component: ContentDetailsDialogDemoComponent,
+  props: {
+    // enableSelection: boolean('enableSelection', true),
+    // selectedFilter: null,
+    // searchText: text('searchText', ''),
+    // searchBehavior: select('searchBehavior', SearchBehavior, SearchBehavior.SimplifiedSearch),
+    // previewItemChange: action('Preview item changed'),
+    // selectedItemsChange: action('Selected items changed'),
+    // totalResultsChange: action('Total results changed')
+  },
 });
