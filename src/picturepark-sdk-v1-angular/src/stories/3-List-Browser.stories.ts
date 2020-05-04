@@ -1,17 +1,50 @@
-import { moduleMetadata } from '@storybook/angular';
-import { action } from '@storybook/addon-actions';
-import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-  AuthService,
   AccessTokenAuthService,
-  SearchBehavior,
+  AuthService,
   PICTUREPARK_CONFIGURATION,
+  SearchBehavior,
 } from '@picturepark/sdk-v1-angular';
-import { PICTUREPARK_UI_CONFIGURATION, ListBrowserModule } from '@picturepark/sdk-v1-angular-ui';
-import { PictureparkConfigurationFactory, PictureparkUIConfigurationFactory } from './config';
+import {
+  ListBrowserModule,
+  PictureparkUIConfiguration,
+  PICTUREPARK_UI_CONFIGURATION,
+} from '@picturepark/sdk-v1-angular-ui';
+import { action } from '@storybook/addon-actions';
+import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
+import { moduleMetadata } from '@storybook/angular';
+import { PictureparkAppSetting } from 'src/config';
 import { ListBrowserDemoComponent } from './components/list-browser-demo/list-browser-demo.component';
+
+export function oidcConfigFactory() {
+  return PictureparkAppSetting();
+}
+
+export function pictureparkUIConfigurationFactory() {
+  return <PictureparkUIConfiguration>{
+    ContentBrowserComponent: {
+      download: true,
+      select: true,
+      share: true,
+      preview: true,
+      basket: true,
+    },
+    BasketComponent: {
+      download: true,
+      select: false,
+      share: true,
+    },
+    BrowserToolbarComponent: {
+      select: true,
+    },
+    ListBrowserComponent: {
+      download: true,
+      select: true,
+      share: true,
+    },
+  };
+}
 
 export enum SchemaId {
   MediaType = 'MediaType',
@@ -32,8 +65,8 @@ export default {
       imports: [ListBrowserModule, HttpClientModule, BrowserAnimationsModule],
       providers: [
         { provide: AuthService, useClass: AccessTokenAuthService },
-        { provide: PICTUREPARK_CONFIGURATION, useFactory: PictureparkConfigurationFactory },
-        { provide: PICTUREPARK_UI_CONFIGURATION, useFactory: PictureparkUIConfigurationFactory },
+        { provide: PICTUREPARK_CONFIGURATION, useFactory: oidcConfigFactory },
+        { provide: PICTUREPARK_UI_CONFIGURATION, useFactory: pictureparkUIConfigurationFactory },
       ],
     }),
   ],

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService, ShareContentDetail, ShareDetail } from '@picturepark/sdk-v1-angular';
 import { ContentDetailDialogOptions, ContentDetailsDialogComponent } from '@picturepark/sdk-v1-angular-ui';

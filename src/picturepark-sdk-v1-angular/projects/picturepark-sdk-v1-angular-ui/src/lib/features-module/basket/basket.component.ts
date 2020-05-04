@@ -2,7 +2,7 @@ import { Component, Output, EventEmitter, OnInit, Inject, Injector } from '@angu
 import { MatDialog } from '@angular/material/dialog';
 
 // LIBRARIES
-import { PICTUREPARK_UI_CONFIGURATION, PictureparkUIConfiguration, ConfigActions } from '../../configuration';
+import { ConfigActions, PICTUREPARK_UI_CONFIGURATION, PictureparkUIConfiguration } from '../../configuration';
 
 // COMPONENTS
 import { BaseComponent } from '../../shared-module/components/base.component';

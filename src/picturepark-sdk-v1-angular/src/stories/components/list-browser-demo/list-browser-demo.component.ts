@@ -1,5 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { take } from 'rxjs/operators';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   AuthService,
   FilterBase,
@@ -9,7 +8,7 @@ import {
   SearchBehavior,
   SortInfo,
 } from '@picturepark/sdk-v1-angular';
-import { ContentModel } from '@picturepark/sdk-v1-angular-ui';
+import { take } from 'rxjs/operators';
 
 @Component({
   template: `<pp-list-browser
@@ -18,9 +17,6 @@ import { ContentModel } from '@picturepark/sdk-v1-angular-ui';
     [selectedItemIds]="selectedItemIds"
     [enableSelection]="enableSelection"
     [sortInfo]="sortInfo"
-    [filter]="selectedFilter"
-    [searchString]="searchText"
-    [searchBehavior]="searchBehavior"
     (previewItemChange)="openDetails($event)"
     (selectedItemsChange)="selectionChange($event)"
     (totalResultsChange)="resultsChange($event)"
@@ -36,7 +32,7 @@ export class ListBrowserDemoComponent implements OnInit {
   @Input() public searchBehavior: SearchBehavior;
   @Input() public schemaId = 'MediaType';
 
-  @Output() public previewItemChange = new EventEmitter<ContentModel<ListItem>>();
+  @Output() public previewItemChange = new EventEmitter<ListItem>();
   @Output() public selectedItemsChange = new EventEmitter<ListItem[]>();
   @Output() public totalResultsChange = new EventEmitter<number | null>();
 
@@ -58,7 +54,7 @@ export class ListBrowserDemoComponent implements OnInit {
       );
   }
 
-  public openDetails(item: ContentModel<ListItem>) {
+  public openDetails(item: ListItem) {
     this.previewItemChange.emit(item);
   }
 
