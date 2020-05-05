@@ -1,45 +1,11 @@
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AccessTokenAuthService, AuthService, PICTUREPARK_CONFIGURATION } from '@picturepark/sdk-v1-angular';
-import {
-  ContentDetailsDialogModule,
-  PictureparkUIConfiguration,
-  PICTUREPARK_UI_CONFIGURATION,
-  SharedModule,
-} from '@picturepark/sdk-v1-angular-ui';
+import { ContentDetailsDialogModule, PICTUREPARK_UI_CONFIGURATION, SharedModule } from '@picturepark/sdk-v1-angular-ui';
 import { withKnobs } from '@storybook/addon-knobs';
 import { moduleMetadata } from '@storybook/angular';
-import { PictureparkAppSetting } from 'src/config';
 import { ContentDetailsDialogDemoComponent } from './components/content-details-dialog-demo/content-details-dialog-demo.component';
-
-export function oidcConfigFactory() {
-  return PictureparkAppSetting();
-}
-
-export function pictureparkUIConfigurationFactory() {
-  return <PictureparkUIConfiguration>{
-    ContentBrowserComponent: {
-      download: true,
-      select: true,
-      share: true,
-      preview: true,
-      basket: true,
-    },
-    BasketComponent: {
-      download: true,
-      select: false,
-      share: true,
-    },
-    BrowserToolbarComponent: {
-      select: true,
-    },
-    ListBrowserComponent: {
-      download: true,
-      select: true,
-      share: true,
-    },
-  };
-}
+import { oidcConfigFactory, pictureparkUIConfigurationFactory } from './config';
 
 export default {
   title: 'Content Details Dialog',

@@ -6,56 +6,12 @@ import {
   PICTUREPARK_CONFIGURATION,
   SearchBehavior,
 } from '@picturepark/sdk-v1-angular';
-import {
-  ListBrowserModule,
-  PictureparkUIConfiguration,
-  PICTUREPARK_UI_CONFIGURATION,
-} from '@picturepark/sdk-v1-angular-ui';
+import { ListBrowserModule, PICTUREPARK_UI_CONFIGURATION } from '@picturepark/sdk-v1-angular-ui';
 import { action } from '@storybook/addon-actions';
 import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import { moduleMetadata } from '@storybook/angular';
-import { PictureparkAppSetting } from 'src/config';
 import { ListBrowserDemoComponent } from './components/list-browser-demo/list-browser-demo.component';
-
-export function oidcConfigFactory() {
-  return PictureparkAppSetting();
-}
-
-export function pictureparkUIConfigurationFactory() {
-  return <PictureparkUIConfiguration>{
-    ContentBrowserComponent: {
-      download: true,
-      select: true,
-      share: true,
-      preview: true,
-      basket: true,
-    },
-    BasketComponent: {
-      download: true,
-      select: false,
-      share: true,
-    },
-    BrowserToolbarComponent: {
-      select: true,
-    },
-    ListBrowserComponent: {
-      download: true,
-      select: true,
-      share: true,
-    },
-  };
-}
-
-export enum SchemaId {
-  MediaType = 'MediaType',
-  License = 'License',
-  Organisation = 'Organisation',
-  Person = 'Person',
-  DocumentInformation = 'DocumentInformation',
-  ImageInformation = 'ImageInformation',
-  MultimediaInformation = 'MultimediaInformation',
-  OtherContentInformation = 'OtherContentInformation',
-}
+import { oidcConfigFactory, pictureparkUIConfigurationFactory, SchemaId } from './config';
 
 export default {
   title: 'List Browser',

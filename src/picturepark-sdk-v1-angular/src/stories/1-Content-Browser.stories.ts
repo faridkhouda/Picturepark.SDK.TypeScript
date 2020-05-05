@@ -6,45 +6,12 @@ import {
   PICTUREPARK_CONFIGURATION,
   SearchBehavior,
 } from '@picturepark/sdk-v1-angular';
-import {
-  ContentBrowserModule,
-  PictureparkUIConfiguration,
-  PICTUREPARK_UI_CONFIGURATION,
-} from '@picturepark/sdk-v1-angular-ui';
+import { ContentBrowserModule, PICTUREPARK_UI_CONFIGURATION } from '@picturepark/sdk-v1-angular-ui';
 import { action } from '@storybook/addon-actions';
 import { select, text, withKnobs } from '@storybook/addon-knobs';
 import { moduleMetadata } from '@storybook/angular';
-import { PictureparkAppSetting } from 'src/config';
 import { ContentBrowserDemoComponent } from './components/content-browser-demo/content-browser-demo.component';
-
-export function oidcConfigFactory() {
-  return PictureparkAppSetting();
-}
-
-export function pictureparkUIConfigurationFactory() {
-  return <PictureparkUIConfiguration>{
-    ContentBrowserComponent: {
-      download: true,
-      select: true,
-      share: true,
-      preview: true,
-      basket: true,
-    },
-    BasketComponent: {
-      download: true,
-      select: false,
-      share: true,
-    },
-    BrowserToolbarComponent: {
-      select: true,
-    },
-    ListBrowserComponent: {
-      download: true,
-      select: true,
-      share: true,
-    },
-  };
-}
+import { oidcConfigFactory, pictureparkUIConfigurationFactory } from './config';
 
 export default {
   title: 'Content Browser',

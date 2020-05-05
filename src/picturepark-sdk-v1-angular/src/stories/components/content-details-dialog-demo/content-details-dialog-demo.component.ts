@@ -80,36 +80,5 @@ export class ContentDetailsDialogDemoComponent implements OnInit {
       width: '980px',
       height: '700px',
     });
-
-    // let index = this.shareDetail.contentSelections.indexOf(this.shareContent);
-    // this.dialog.open(ContentDetailsDialogComponent,
-    //     {
-    //         data: <ContentDetailDialogOptions>{
-    //             id: this.itemId,
-    //             shareContent: this.shareContent,
-    //             shareDetail: this.shareDetail,
-    //             showMetadata: false,
-    //             hasPrevious: () => {
-    //                 return index !== 0;
-    //             },
-    //             hasNext: () => {
-    //                 return this.shareDetail.contentSelections.length > index + 1;
-    //             },
-    //             previous: () => {
-    //                 index--;
-    //                 return this.shareDetail.contentSelections[index];
-    //             },
-    //             next: () => {
-    //                 index++;
-    //                 return this.shareDetail.contentSelections[index];
-    //             }
-    //         },
-    //         autoFocus: false,
-    //         width: '980px',
-    //         height: '700px',
-    //         maxWidth: '98vw',
-    //         maxHeight: '99vh'
-    //     }
-    // );
   }
 }
